@@ -1,0 +1,1 @@
+* add Specific tag attribute ex: a.link, script.src
