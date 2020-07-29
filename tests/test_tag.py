@@ -1,14 +1,18 @@
-from beam import div, h1, ul, li
+from beam import div, h1, hr, li, ul
 
 
 def test_main():
-    component = div(h1("Title"), _class="content",)
+    component = div(h1("Title"), hr(), _class="content",)
 
-    assert component.render() == '<div class="content"><h1>Title</h1></div>'
+    assert component.render() == (
+        '<div class="content"><h1>Title</h1><hr/></div>'
+    )
 
 
 def test_formating():
     component = h1("My name is {name}")
+
+    assert component.render() == "<h1>My name is </h1>"
 
     component["name"] = "Alice"
     assert component.render() == "<h1>My name is Alice</h1>"
@@ -43,3 +47,18 @@ def test_recursive_formating():
         "</ul>"
         "</div>"
     )
+
+
+def test_formating_accessibility():
+    li_item = li("{spec}")
+    ul_item = ul(li_item, li("Green"), li("Blue"))
+    component = div("I like these color", ul_item)
+
+    li_item["spec"] = "Red"
+    assert component["spec"] == "Red"
+
+
+def test_formating_not_found():
+    component = div("I like these color")
+
+    assert component["color"] is None

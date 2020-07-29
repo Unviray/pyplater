@@ -1,0 +1,12 @@
+black==19.*
+pytest==5.4.3
+pytest_cov==2.10
+coveralls==2.1.1
+twine==3.2.0
+flake8==3.8.3
+flake8-blind-except==0.1.1
+flake8-bugbear==20.1.4
+flake8-builtins==1.5.3
+flake8-comprehensions==3.2.3
+flake8-debugger==3.2.1
+flake8-isort==3.0.1
