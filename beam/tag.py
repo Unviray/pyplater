@@ -27,6 +27,9 @@ class Element(object):
             params.append(self.formating(result))
 
         for content in self.content:
+            if callable(content):
+                content = content()
+
             if isinstance(content, Element):
                 result = content.render()
             # elif isinstance(content, str):

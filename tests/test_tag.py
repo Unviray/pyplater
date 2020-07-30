@@ -1,4 +1,4 @@
-from beam import div, h1, hr, li, ul
+from beam import div, em, h1, hr, li, ul
 
 
 def test_main():
@@ -62,3 +62,19 @@ def test_formating_not_found():
     component = div("I like these color")
 
     assert component["color"] is None
+
+
+def test_callable_to_tag():
+    def color():
+        return em("Red")
+
+    component = div("I like ", color, " color")
+    assert component.render() == "<div>I like <em>Red</em> color</div>"
+
+
+def test_callable_to_str():
+    def color():
+        return "Red"
+
+    component = div("I like ", color, " color")
+    assert component.render() == "<div>I like Red color</div>"
