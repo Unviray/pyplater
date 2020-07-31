@@ -15,6 +15,10 @@ class Element(object):
     # TAG_RAW = "<Element class='bg-dark'>The element</Element>"
 
     def __init__(self, *args, **kwargs):
+        self._class = kwargs.pop('_class', [])
+        if isinstance(self._class, str):
+            self._class = self._class.split(" ")
+
         self.param = kwargs
         self.content = list(args)
         self.formated = {}
@@ -27,10 +31,17 @@ class Element(object):
         params = []  # handle list of params ex: href="https://github.com"
         contents = []  # handle list of contents ex: <p>name</p>
 
+        if len(self._class) != 0:
+            value_class = ' '.join(self._class)
+            params.append(f'class="{value_class}"')
+
         for key in self.param:
-            # ex: class="bg-{color}"
-            result = f'{key.replace("_", "")}="{self.param[key]}"'
-            # ex: class="bg-dark"
+            # ex: href="https://{site}"
+            key_param = key.replace("_", "")
+            value_param = self.param[key]
+
+            result = f'{key_param}="{value_param}"'
+            # ex: href="https://www.google.com"
             params.append(self.formating(result))
 
         for content in self.content:

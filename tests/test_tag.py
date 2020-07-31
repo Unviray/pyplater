@@ -1,4 +1,4 @@
-from beam import div, em, h1, hr, li, ul
+from beam import a, button, div, em, h1, hr, li, ul
 
 
 def test_main():
@@ -6,6 +6,14 @@ def test_main():
 
     assert component.render() == (
         '<div class="content"><h1>Title</h1><hr/></div>'
+    )
+
+
+def test_param():
+    component = a('Google', href="https://www.google.com/")
+
+    assert component.render() == (
+        '<a href="https://www.google.com/">Google</a>'
     )
 
 
@@ -78,3 +86,11 @@ def test_callable_to_str():
 
     component = div("I like ", color, " color")
     assert component.render() == "<div>I like Red color</div>"
+
+
+def test_class_list():
+    btn = button("submit",  _class=["btn", "btn-primary", "btn-block"])
+
+    assert btn.render() == (
+        '<button class="btn btn-primary btn-block">submit</button>'
+    )

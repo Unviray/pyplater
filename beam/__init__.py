@@ -16,13 +16,13 @@ Usage example:
 
 
 from .tag import (_del, _input, a, abbr, address, article, aside, audio,
-                  blockquote, body, br, caption, cite, dd, dfn, div, dl, dt,
-                  em, fieldset, figcaption, figure, footer, form, h1, h2, h3,
-                  h4, h5, h6, head, header, hr, html, img, ins, kbd, label,
-                  legend, li, link, mark, meta, nav, ol, optgroup, option, p,
-                  pre, progress, q, script, section, select, source, span,
-                  strong, style, sub, sup, table, tbody, td, textarea, tfoot,
-                  th, thead, time, title, tr, ul, video)
+                  blockquote, body, br, button, caption, cite, dd, dfn, div,
+                  dl, dt, em, fieldset, figcaption, figure, footer, form, h1,
+                  h2, h3, h4, h5, h6, head, header, hr, html, img, ins, kbd,
+                  label, legend, li, link, mark, meta, nav, ol, optgroup,
+                  option, p, pre, progress, q, script, section, select, source,
+                  span, strong, style, sub, sup, table, tbody, td, textarea,
+                  tfoot, th, thead, time, title, tr, ul, video)
 
 __all__ = (
     # Base
@@ -44,8 +44,8 @@ __all__ = (
     'table', 'caption', 'tr', 'th', 'td', 'thead', 'tbody', 'tfoot',
 
     # Form
-    'form', 'fieldset', 'legend', 'label', '_input', 'textarea', 'select',
-    'option', 'optgroup',
+    'form', 'fieldset', 'legend', 'label', '_input', 'button', 'textarea',
+    'select', 'option', 'optgroup',
 
     # Section
     'header', 'nav', 'footer', 'section', 'article', 'aside',
