@@ -1,185 +1,58 @@
 """
 beam
 ====
+
+Build html component with python.
+
+.. codeauthor:: Unviray <unviray@gmail.com>
+
+Usage example:
+
+>>> from beam import h1
+>>> title = h1("title")
+>>> title.render()
+<h1>title</h1>
 """
 
-from .tag import (
-    # Base
-    html,
-    head,
-    body,
 
-    # Head
-    link,
-    meta,
-    script,
-    style,
-    title,
-
-    # Structure
-    abbr,
-    blockquote,
-    cite,
-    q,
-    sup,
-    sub,
-    strong,
-    em,
-    mark,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    img,
-    figure,
-    figcaption,
-    audio,
-    video,
-    source,
-    a,
-    br,
-    p,
-    hr,
-    address,
-    _del,
-    ins,
-    dfn,
-    kbd,
-    pre,
-    progress,
-    time,
-
-    # Liste
-    ul,
-    ol,
-    li,
-    dl,
-    dt,
-    dd,
-
-    # Table
-    table,
-    caption,
-    tr,
-    th,
-    td,
-    thead,
-    tbody,
-    tfoot,
-
-    # Form
-    form,
-    fieldset,
-    legend,
-    label,
-    _input,
-    textarea,
-    select,
-    option,
-    optgroup,
-
-    # Section
-    header,
-    nav,
-    footer,
-    section,
-    article,
-    aside,
-
-    # Generic
-    div,
-    span,
-)
-
+from .tag import (_del, _input, a, abbr, address, article, aside, audio,
+                  blockquote, body, br, caption, cite, dd, dfn, div, dl, dt,
+                  em, fieldset, figcaption, figure, footer, form, h1, h2, h3,
+                  h4, h5, h6, head, header, hr, html, img, ins, kbd, label,
+                  legend, li, link, mark, meta, nav, ol, optgroup, option, p,
+                  pre, progress, q, script, section, select, source, span,
+                  strong, style, sub, sup, table, tbody, td, textarea, tfoot,
+                  th, thead, time, title, tr, ul, video)
 
 __all__ = (
     # Base
-    'html',
-    'head',
-    'body',
+    'html', 'head', 'body',
 
     # Head
-    'link',
-    'meta',
-    'script',
-    'style',
-    'title',
+    'link', 'meta', 'script', 'style', 'title',
 
     # Structure
-    'abbr',
-    'blockquote',
-    'cite',
-    'q',
-    'sup',
-    'sub',
-    'strong',
-    'em',
-    'mark',
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'img',
-    'figure',
-    'figcaption',
-    'audio',
-    'video',
-    'source',
-    'a',
-    'br',
-    'p',
-    'hr',
-    'address',
-    '_del',
-    'ins',
-    'dfn',
-    'kbd',
-    'pre',
-    'progress',
-    'time',
+    'abbr', 'blockquote', 'cite', 'q', 'sup', 'sub', 'strong', 'em', 'mark',
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'img', 'figure', 'figcaption', 'audio',
+    'video', 'source', 'a', 'br', 'p', 'hr', 'address', '_del', 'ins', 'dfn',
+    'kbd', 'pre', 'progress', 'time',
 
-    # Liste
-    'ul',
-    'ol',
-    'li',
-    'dl',
-    'dt',
-    'dd',
+    # List
+    'ul', 'ol', 'li', 'dl', 'dt', 'dd',
 
     # Table
-    'table',
-    'caption',
-    'tr',
-    'th',
-    'td',
-    'thead',
-    'tbody',
-    'tfoot',
+    'table', 'caption', 'tr', 'th', 'td', 'thead', 'tbody', 'tfoot',
 
     # Form
-    'form',
-    'fieldset',
-    'legend',
-    'label',
-    '_input',
-    'textarea',
-    'select',
-    'option',
-    'optgroup',
+    'form', 'fieldset', 'legend', 'label', '_input', 'textarea', 'select',
+    'option', 'optgroup',
 
     # Section
-    'header',
-    'nav',
-    'footer',
-    'section',
-    'article',
-    'aside',
+    'header', 'nav', 'footer', 'section', 'article', 'aside',
 
     # Generic
-    'div',
-    'span',
-) 
+    'div', 'span',
+)
+
+
+__version__ = "0.1.0"

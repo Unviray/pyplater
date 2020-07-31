@@ -1,12 +1,15 @@
 """
-beam.tag.
+beam.tag
+========
 
 Include all tags.
 """
 
 
 class Element(object):
-    """Base element of any tags."""
+    """
+    Base element of any tags.
+    """
 
     TAG_RAW = "<{tag_name} {params}>{contents}</{tag_name}>"
     # TAG_RAW = "<Element class='bg-dark'>The element</Element>"
@@ -17,8 +20,12 @@ class Element(object):
         self.formated = {}
 
     def render(self):
-        params = []
-        contents = []
+        """
+        Transform Element to str and recursively their content.
+        """
+
+        params = []  # handle list of params ex: href="https://github.com"
+        contents = []  # handle list of contents ex: <p>name</p>
 
         for key in self.param:
             # ex: class="bg-{color}"
@@ -35,9 +42,11 @@ class Element(object):
             # elif isinstance(content, str):
             else:
                 result = str(content)
+
             contents.append(self.formating(result))
 
         if len(params) == 0:
+            # remove space between tag_name and params
             tag_raw = self.TAG_RAW.replace(" ", "")
         else:
             tag_raw = self.TAG_RAW
@@ -49,6 +58,10 @@ class Element(object):
         )
 
     def formating(self, text):
+        """
+        Get setted item and format :param text:
+        """
+
         key = self.formated.copy()
         while True:
             try:
@@ -58,8 +71,9 @@ class Element(object):
 
     def __setitem__(self, key, value):
         """
-        Set item used on formating
+        Set item used on formating.
         """
+
         self.formated[key] = value
 
         for content in self.content:
@@ -67,6 +81,10 @@ class Element(object):
                 content[key] = value
 
     def __getitem__(self, key):
+        """
+        Get setted item and recursively in self.content
+        """
+
         try:
             return self.formated[key]
         except KeyError:
@@ -79,6 +97,10 @@ class Element(object):
 
 
 class SingleElement(Element):
+    """
+    For single tag like: <img/>, <hr/> ...
+    """
+
     TAG_RAW = "<{tag_name} {params} />"
 
     def __init__(self, **kwargs):
