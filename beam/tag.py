@@ -5,6 +5,8 @@ beam.tag
 Include all tags.
 """
 
+from .utils import classing
+
 
 class Element(object):
     """
@@ -32,7 +34,7 @@ class Element(object):
         contents = []  # handle list of contents ex: <p>name</p>
 
         if len(self._class) != 0:
-            value_class = ' '.join(self._class)
+            value_class = classing(self._class)
             params.append(f'class="{value_class}"')
 
         for key in self.param:
