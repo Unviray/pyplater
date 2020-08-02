@@ -72,20 +72,20 @@ def test_formating_not_found():
     assert component["color"] is None
 
 
-def test_callable_to_tag():
-    def color():
-        return em("Red")
-
-    component = div("I like ", color, " color")
-    assert component.render() == "<div>I like <em>Red</em> color</div>"
-
-
 def test_callable_to_str():
     def color():
         return "Red"
 
     component = div("I like ", color, " color")
     assert component.render() == "<div>I like Red color</div>"
+
+
+def test_callable_to_tag():
+    def color():
+        return em("Red")
+
+    component = div("I like ", color, " color")
+    assert component.render() == "<div>I like <em>Red</em> color</div>"
 
 
 def test_class_list():
