@@ -27,9 +27,10 @@ In any case don't forget documenting code that isn't clear at first glance.
 Code Conventions
 ----------------
 
-In general the Beam source should always follow `PEP 8 <http://legacy.python.org/dev/peps/pep-0008/>`_.
-Exceptions are allowed in well justified and documented cases. However we make
-a small exception concerning docstrings:
+In general the Beam source should always follow
+`PEP 8 <http://legacy.python.org/dev/peps/pep-0008/>`_. Exceptions are allowed
+in well justified and documented cases. However we make a small exception
+concerning docstrings:
 
 When using multiline docstrings, keep the opening and closing triple quotes
 on their own lines and add an empty line after it.

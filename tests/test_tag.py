@@ -1,4 +1,4 @@
-from beam import a, button, div, em, h1, hr, li, ul
+from beam import _input, a, button, div, em, h1, hr, li, ul
 
 
 def test_main():
@@ -94,3 +94,9 @@ def test_class_list():
     assert btn.render() == (
         '<button class="btn btn-primary btn-block">submit</button>'
     )
+
+
+def test_reserved_name():
+    component = _input()
+
+    assert component.render() == '<input/>'

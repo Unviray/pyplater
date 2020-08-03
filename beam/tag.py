@@ -65,7 +65,7 @@ class Element(object):
             tag_raw = self.TAG_RAW
 
         return tag_raw.format(
-            tag_name=self.__class__.__name__,
+            tag_name=self.__class__.__name__.replace("_", ""),
             params=" ".join(params),
             contents="".join(contents),
         )
