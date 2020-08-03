@@ -2,10 +2,10 @@ from beam import _input, a, button, div, em, h1, hr, li, ul
 
 
 def test_main():
-    component = div(h1("Title"), hr(), _class="content",)
+    component = div(h1("Title"), hr(), _class="content", _id="content")
 
     assert component.render() == (
-        '<div class="content"><h1>Title</h1><hr/></div>'
+        '<div class="content" id="content"><h1>Title</h1><hr/></div>'
     )
 
 
@@ -100,3 +100,9 @@ def test_reserved_name():
     component = _input()
 
     assert component.render() == '<input/>'
+
+
+def test_underscore_attribute():
+    component = a(data_attribute="value")
+
+    assert component.render() == '<a data-attribute="value"></a>'

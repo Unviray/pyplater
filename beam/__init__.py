@@ -18,7 +18,7 @@ Usage example:
 from .tag import (_del, _input, a, abbr, address, article, aside, audio,
                   blockquote, body, br, button, caption, cite, dd, dfn, div,
                   dl, dt, em, fieldset, figcaption, figure, footer, form, h1,
-                  h2, h3, h4, h5, h6, head, header, hr, html, img, ins, kbd,
+                  h2, h3, h4, h5, h6, head, header, hr, html, i, img, ins, kbd,
                   label, legend, li, link, mark, meta, nav, ol, optgroup,
                   option, p, pre, progress, q, script, section, select, source,
                   span, strong, style, sub, sup, table, tbody, td, textarea,
@@ -34,8 +34,8 @@ __all__ = (
     # Structure
     'abbr', 'blockquote', 'cite', 'q', 'sup', 'sub', 'strong', 'em', 'mark',
     'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'img', 'figure', 'figcaption', 'audio',
-    'video', 'source', 'a', 'br', 'p', 'hr', 'address', '_del', 'ins', 'dfn',
-    'kbd', 'pre', 'progress', 'time',
+    'video', 'source', 'a', 'br', 'p', 'hr', 'i', 'address', '_del', 'ins',
+    'dfn', 'kbd', 'pre', 'progress', 'time',
 
     # List
     'ul', 'ol', 'li', 'dl', 'dt', 'dd',

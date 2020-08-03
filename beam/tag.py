@@ -39,7 +39,10 @@ class Element(object):
 
         for key in self.param:
             # ex: href="https://{site}"
-            key_param = key.replace("_", "")
+            if key.startswith("_"):
+                key_param = key.replace("_", "", 1)
+            else:
+                key_param = key.replace("_", "-")
             value_param = self.param[key]
 
             result = f'{key_param}="{value_param}"'
@@ -258,6 +261,10 @@ class p(Element):
 
 
 class hr(SingleElement):
+    pass
+
+
+class i(Element):
     pass
 
 
