@@ -2,7 +2,7 @@ import os
 
 from setuptools import find_packages, setup
 
-from beam import __version__
+from htmlpy import __version__
 
 
 def read(fname):
@@ -11,9 +11,9 @@ def read(fname):
 
 
 setup(
-    name="beam",
+    name="htmlpy",
     version=__version__,
-    packages=find_packages(include=["beam", "beam.*"]),
+    packages=find_packages(include=["htmlpy", "htmlpy.*"]),
     zip_safe=True,
 
     author="Unviray",
@@ -22,7 +22,7 @@ setup(
     long_description=read('README.rst'),
     license="MIT license",
     keywords="html component react angular vue javascript js nodejs node",
-    url="https://github.com/Unviray/beam",
+    url="https://github.com/Unviray/htmlpy",
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",

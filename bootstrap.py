@@ -1,5 +1,5 @@
-from beam import button, div
-from beam.utils import classing
+from htmlpy import button, div
+from htmlpy.utils import classing
 
 
 def container(*args, breakpoint=''):

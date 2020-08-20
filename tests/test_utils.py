@@ -1,4 +1,4 @@
-from beam.utils import classing
+from htmlpy.utils import classing
 
 
 def test_classing():

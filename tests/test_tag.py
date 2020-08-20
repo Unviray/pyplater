@@ -1,4 +1,4 @@
-from beam import _input, a, button, div, em, h1, hr, li, ul
+from htmlpy import _input, a, button, div, em, h1, hr, li, ul
 
 
 def test_main():
