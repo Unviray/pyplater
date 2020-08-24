@@ -1,11 +1,11 @@
-Htmlpy
-====
+Templater
+=========
 
 Build ``html`` component with python.
 
 .. code-block:: python
 
-    from htmlpy import *  # import all tag
+    from templater import *  # import all tag
 
     documents = html(
         head(
@@ -26,11 +26,11 @@ Contributing
 ------------
 
 Whether reporting bugs, discussing improvements and new ideas or writing
-extensions: Contributions to Htmlpy are welcome! Here's how to get started:
+extensions: Contributions to Templater are welcome! Here's how to get started:
 
 1. Check for open issues or open a fresh issue to start a discussion around
    a feature idea or a bug
-2. Fork `the repository <https://github.com/Unviray/htmlpy/>`_ on Github,
+2. Fork `the repository <https://github.com/Unviray/templater/>`_ on Github,
    create a new branch off the `master` branch and start making your changes
    (known as `GitHub Flow <https://guides.github.com/introduction/flow/index.html>`_)
 3. Write a test which shows that the bug was fixed or that the feature works

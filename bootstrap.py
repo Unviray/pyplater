@@ -1,5 +1,5 @@
-from htmlpy import button, div
-from htmlpy.utils import classing
+from templater import button, div
+from templater.utils import classing
 
 
 def container(*args, breakpoint=''):
@@ -24,3 +24,5 @@ def btn(*args, color="primary", block=False, **kwargs):
     c = classing(_class, c)
 
     return button(*args, _class=c, **kwargs)
+
+container()

@@ -1,8 +1,8 @@
 """
-htmlpy.utils
-============
+templater.utils
+===============
 
-Utilities in htmlpy.
+Utilities in templater.
 """
 
 from typing import Iterable

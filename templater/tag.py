@@ -1,6 +1,6 @@
 """
-htmlpy.tag
-==========
+templater.tag
+=============
 
 Include all tags.
 """
@@ -13,17 +13,21 @@ class Element(object):
     Base element of any tags.
     """
 
-    TAG_RAW = "<{tag_name} {params}>{contents}</{tag_name}>"
+    TAG_RAW = "<{tag_name}{params}>{contents}</{tag_name}>"
     # TAG_RAW = "<Element class='bg-dark'>The element</Element>"
 
+    TAG_NAME = None
+
     def __init__(self, *args, **kwargs):
-        self._class = kwargs.pop('_class', [])
+        self._class = kwargs.pop("_class", [])
         if isinstance(self._class, str):
             self._class = self._class.split(" ")
 
         self.param = kwargs
         self.content = list(args)
         self.formated = {}
+
+        self.TAG_NAME = self.TAG_NAME or self.__class__.__name__.replace("_", "")
 
     def render(self):
         """
@@ -63,15 +67,15 @@ class Element(object):
 
             contents.append(self.formating(result))
 
+        # add space between tag_name and params
         if len(params) == 0:
-            # remove space between tag_name and params
-            tag_raw = self.TAG_RAW.replace(" ", "")
+            first_space = ""
         else:
-            tag_raw = self.TAG_RAW
+            first_space = " "
 
-        return tag_raw.format(
-            tag_name=self.__class__.__name__.replace("_", ""),
-            params=" ".join(params),
+        return self.TAG_RAW.format(
+            tag_name=self.TAG_NAME,
+            params=first_space + " ".join(params),
             contents="".join(contents),
         )
 
@@ -119,7 +123,7 @@ class SingleElement(Element):
     For single tag like: <img/>, <hr/> ...
     """
 
-    TAG_RAW = "<{tag_name} {params} />"
+    TAG_RAW = "<{tag_name}{params}/>"
 
     def __init__(self, **kwargs):
         super(SingleElement, self).__init__(**kwargs)
@@ -129,7 +133,7 @@ class SingleElement(Element):
 
 
 class html(Element):
-    pass
+    TAG_RAW = "<!doctype html><{tag_name}{params}>{contents}</{tag_name}>"
 
 
 class head(Element):

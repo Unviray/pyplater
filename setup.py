@@ -2,7 +2,7 @@ import os
 
 from setuptools import find_packages, setup
 
-from htmlpy import __version__
+from templater import __version__
 
 
 def read(fname):
@@ -11,9 +11,9 @@ def read(fname):
 
 
 setup(
-    name="htmlpy",
+    name="templater",
     version=__version__,
-    packages=find_packages(include=["htmlpy", "htmlpy.*"]),
+    packages=find_packages(include=["templater", "templater.*"]),
     zip_safe=True,
 
     author="Unviray",
@@ -22,7 +22,7 @@ setup(
     long_description=read('README.rst'),
     license="MIT license",
     keywords="html component react angular vue javascript js nodejs node",
-    url="https://github.com/Unviray/htmlpy",
+    url="https://github.com/Unviray/templater",
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",

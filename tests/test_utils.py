@@ -1,4 +1,4 @@
-from htmlpy.utils import classing
+from templater.utils import classing
 
 
 def test_classing():
