@@ -13,7 +13,7 @@ def read(fname):
 setup(
     name="templater",
     version=__version__,
-    packages=find_packages(include=["templater", "templater.*"]),
+    packages=find_packages(exclude=["tests"]),
     zip_safe=True,
 
     author="Unviray",
