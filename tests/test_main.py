@@ -1,5 +1,5 @@
 from templater.tag import Element
-from templater import _input, a, button, div, em, h1, hr, li, ul
+from templater import _input, a, button, div, em, h1, html, hr, li, ul
 
 
 def test_main():
@@ -11,11 +11,9 @@ def test_main():
 
 
 def test_param():
-    component = a('Google', href="https://www.google.com/")
+    component = a("Google", href="https://www.google.com/")
 
-    assert component.render() == (
-        '<a href="https://www.google.com/">Google</a>'
-    )
+    assert component.render() == ('<a href="https://www.google.com/">Google</a>')
 
 
 def test_formating():
@@ -31,8 +29,7 @@ def test_formating():
 
 
 def test_recursive_formating():
-    component = div("I like these color",
-                    ul(li("{spec}"), li("Green"), li("Blue"),))
+    component = div("I like these color", ul(li("{spec}"), li("Green"), li("Blue"),))
 
     component["spec"] = "Red"
     assert component.render() == (
@@ -90,17 +87,15 @@ def test_callable_to_tag():
 
 
 def test_class_list():
-    btn = button("submit",  _class=["btn", "btn-primary", "btn-block"])
+    btn = button("submit", _class=["btn", "btn-primary", "btn-block"])
 
-    assert btn.render() == (
-        '<button class="btn btn-primary btn-block">submit</button>'
-    )
+    assert btn.render() == ('<button class="btn btn-primary btn-block">submit</button>')
 
 
 def test_reserved_name():
     component = _input()
 
-    assert component.render() == '<input/>'
+    assert component.render() == "<input/>"
 
 
 def test_underscore_attribute():
@@ -109,11 +104,24 @@ def test_underscore_attribute():
     assert component.render() == '<a data-attribute="value"></a>'
 
 
+def test_call():
+    component = div(data="value")(h1('content'), 'text')
+
+    assert component.render() == '<div data="value"><h1>content</h1>text</div>'
+
+
 def test_custom_tag():
     class an_element(Element):
-        TAG_RAW = "{tag_name} [{params}]"
+        TAG_RAW = "{tag_name} [{params} ]"
         TAG_NAME = "Foo"
 
-    component = an_element(data='value')
+    component = an_element(data="value")
 
-    assert component.render() == 'Foo [ data="value"]'
+    assert component.render() == 'Foo [ data="value" ]'
+
+
+# Each tag
+
+
+def test_html():
+    assert html().render() == "<!doctype html><html></html>"

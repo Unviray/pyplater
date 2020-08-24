@@ -117,6 +117,15 @@ class Element(object):
 
             return None
 
+    def __call__(self, *args):
+        """
+        Populate content
+        """
+
+        self.content += list(args)
+
+        return self
+
 
 class SingleElement(Element):
     """
