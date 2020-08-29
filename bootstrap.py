@@ -2,7 +2,7 @@
 Helper for Bootstrap 4.3
 """
 
-from pyplate import (
+from pyplater import (
     html,
     head,
     meta,
@@ -15,7 +15,7 @@ from pyplate import (
     blockquote,
     footer,
 )
-from pyplate.utils import classing
+from pyplater.utils import classing
 
 
 RESPONSIVE_BP = ["xs", "sm", "md", "lg", "xl"]

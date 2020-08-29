@@ -2,7 +2,7 @@ import os
 
 from setuptools import find_packages, setup
 
-from pyplate import __version__
+from pyplater import __version__
 
 
 def read(fname):
@@ -11,7 +11,7 @@ def read(fname):
 
 
 setup(
-    name="pyplate",
+    name="pyplater",
     version=__version__,
     packages=find_packages(exclude=["tests"]),
     zip_safe=True,
@@ -22,7 +22,7 @@ setup(
     long_description=read('README.rst'),
     license="MIT license",
     keywords="html component react angular vue javascript js nodejs node",
-    url="https://github.com/Unviray/pyplate",
+    url="https://github.com/Unviray/pyplater",
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",

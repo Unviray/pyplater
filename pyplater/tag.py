@@ -1,5 +1,5 @@
 """
-pyplate.tag
+pyplater.tag
 =============
 
 Include all tags.

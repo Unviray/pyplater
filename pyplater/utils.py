@@ -1,8 +1,8 @@
 """
-pyplate.utils
+pyplater.utils
 ===============
 
-Utilities in pyplate.
+Utilities in pyplater.
 """
 
 from typing import Iterable

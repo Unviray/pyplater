@@ -1,4 +1,4 @@
-from pyplate.utils import classing
+from pyplater.utils import classing
 
 
 def test_classing():

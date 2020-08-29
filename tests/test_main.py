@@ -1,5 +1,5 @@
-from pyplate.tag import Element
-from pyplate import _input, a, button, div, em, h1, html, hr, li, ul
+from pyplater.tag import Element
+from pyplater import _input, a, button, div, em, h1, html, hr, li, ul
 
 
 def test_main():
