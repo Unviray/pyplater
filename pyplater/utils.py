@@ -1,8 +1,8 @@
 """
-templater.utils
+pyplate.utils
 ===============
 
-Utilities in templater.
+Utilities in pyplate.
 """
 
 from typing import Iterable

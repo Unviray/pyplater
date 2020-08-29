@@ -1,5 +1,5 @@
 """
-templater.tag
+pyplate.tag
 =============
 
 Include all tags.

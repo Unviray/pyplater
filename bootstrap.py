@@ -2,7 +2,7 @@
 Helper for Bootstrap 4.3
 """
 
-from templater import (
+from pyplate import (
     html,
     head,
     meta,
@@ -15,7 +15,7 @@ from templater import (
     blockquote,
     footer,
 )
-from templater.utils import classing
+from pyplate.utils import classing
 
 
 RESPONSIVE_BP = ["xs", "sm", "md", "lg", "xl"]
@@ -86,7 +86,7 @@ def container(breakpoint="", **kwargs):
     """
 
     if breakpoint:
-        if breakpoint in RESPONSIVE_BP + "fluid":
+        if breakpoint in RESPONSIVE_BP + ["fluid"]:
             breakpoint = "-" + breakpoint
         else:
             print(f'Breakpoint should be one of {RESPONSIVE_BP} or "fluid')
@@ -161,9 +161,9 @@ def lead(*args, **kwargs):
     return div(_class=c, **kwargs)(*args)
 
 
-def quote(author='', **kwargs):
+def quote(author="", **kwargs):
     class b(blockquote):
-        TAG_NAME = 'blockquote'
+        TAG_NAME = "blockquote"
 
         def __call__(self, *args):
             firstChild = self.content[0](*args)
@@ -174,6 +174,45 @@ def quote(author='', **kwargs):
     c = classing("blockquote", *c)
 
     return b(_class=c, **kwargs)(
-        p(_class="mb-0"),
-        footer(_class="blockquote-footer")(author)
+        p(_class="mb-0"), footer(_class="blockquote-footer")(author)
     )
+
+
+# components
+
+
+def btn(color="primary", **kwargs):
+    tag = kwargs.pop("tag", button)
+    outline = kwargs.pop("outline", False)
+    size = kwargs.pop("size", "")
+    block = kwargs.pop("block", False)
+
+    if tag == a:
+        kwargs['role'] = kwargs.pop('role', 'button')
+        kwargs['href'] = kwargs.pop('href', '#')
+    else:
+        kwargs['type'] = kwargs.pop('type', 'button')
+
+    if color:
+        if color in COLOR_BP + ["link"]:
+            color = "btn-outline-" + color if outline else "btn-" + color
+        else:
+            print(f'Color should be one of {COLOR_BP} or "link')
+            color = ""
+
+    if size:
+        if size in ('sm', 'lg'):
+            size = "btn-" + size
+        else:
+            print(f'Size should be one of ["sm", "lg"]')
+            size = ""
+
+    if block:
+        block = "btn-block"
+    else:
+        block = ""
+
+    c = kwargs.pop("_class", [])
+    c = classing("btn", color, size, block, *c)
+
+    return tag(_class=c, **kwargs)

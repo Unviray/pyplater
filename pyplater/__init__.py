@@ -1,5 +1,5 @@
 """
-templater
+pyplate
 =========
 
 Build html component with python.
@@ -8,7 +8,7 @@ Build html component with python.
 
 Usage example:
 
->>> from templater import h1
+>>> from pyplate import h1
 >>> title = h1("title")
 >>> title.render()
 <h1>title</h1>
