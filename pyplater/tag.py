@@ -13,29 +13,29 @@ class Element(object):
     Base element of any tags.
     """
 
-    TAG_RAW = "<{tag_name}{params}>{contents}</{tag_name}>"
+    TAG_RAW = "<{tag_name}{params}>{childrens}</{tag_name}>"
     # TAG_RAW = "<Element class='bg-dark'>The element</Element>"
 
     TAG_NAME = None
 
-    def __init__(self, *args, **kwargs):
-        self._class = kwargs.pop("_class", [])
+    def __init__(self, *children, **props):
+        self._class = props.pop("_class", [])
         if isinstance(self._class, str):
             self._class = self._class.split(" ")
 
-        self.param = kwargs
-        self.content = list(args)
+        self.param = props
+        self.children = list(children)
         self.formated = {}
 
         self.TAG_NAME = self.TAG_NAME or self.__class__.__name__.replace("_", "")
 
     def render(self):
         """
-        Transform Element to str and recursively their content.
+        Transform Element to str and recursively their children.
         """
 
         params = []  # handle list of params ex: href="https://github.com"
-        contents = []  # handle list of contents ex: <p>name</p>
+        childrens = []  # handle list of childrens ex: <p>name</p>
 
         if len(self._class) != 0:
             value_class = classing(self._class)
@@ -45,27 +45,27 @@ class Element(object):
         for key in self.param:
             # ex: href="https://{site}"
             if key.startswith("_"):
-                key_param = key.replace("_", "", 1)
+                key_param = key.replace("_", "", 1)  # _class -> class
             else:
-                key_param = key.replace("_", "-")
+                key_param = key.replace("_", "-")  # aria_clic -> aria-click
             value_param = self.param[key]
 
             result = f'{key_param}="{value_param}"'
             # ex: href="https://www.google.com"
-            params.append(self.formating(result))
+            params.append(self._formating(result))
 
-        # render content
-        for content in self.content:
-            if callable(content):
-                content = content()
+        # render children
+        for children in self.children:
+            if callable(children):
+                children = children()
 
-            if isinstance(content, Element):
-                result = content.render()
-            # elif isinstance(content, str):
+            if isinstance(children, Element):
+                result = children.render()
+            # elif isinstance(children, str):
             else:
-                result = str(content)
+                result = str(children)
 
-            contents.append(self.formating(result))
+            childrens.append(self._formating(result))
 
         # add space between tag_name and params
         if len(params) == 0:
@@ -76,15 +76,19 @@ class Element(object):
         return self.TAG_RAW.format(
             tag_name=self.TAG_NAME,
             params=first_space + " ".join(params),
-            contents="".join(contents),
+            childrens="".join(childrens),
         )
 
-    def formating(self, text):
+    def _formating(self, text):
         """
         Get setted item and format :param text:
         """
 
         key = self.formated.copy()
+
+        if len(key) == 0:
+            return text
+
         while True:
             try:
                 return text.format_map(key)
@@ -93,36 +97,36 @@ class Element(object):
 
     def __setitem__(self, key, value):
         """
-        Set item used on formating.
+        Set item used on _formating.
         """
 
         self.formated[key] = value
 
-        for content in self.content:
-            if isinstance(content, Element):
-                content[key] = value
+        for children in self.children:
+            if isinstance(children, Element):
+                children[key] = value
 
     def __getitem__(self, key):
         """
-        Get setted item and recursively in self.content
+        Get setted item and recursively in self.children
         """
 
         try:
             return self.formated[key]
         except KeyError:
-            for content in self.content:
-                if isinstance(content, Element):
-                    if content[key] is not None:
-                        return content[key]
+            for children in self.children:
+                if isinstance(children, Element):
+                    if children[key] is not None:
+                        return children[key]
 
             return None
 
-    def __call__(self, *args):
+    def __call__(self, *children):
         """
-        Populate content
+        Populate children
         """
 
-        self.content += list(args)
+        self.children += list(children)
 
         return self
 
@@ -134,15 +138,15 @@ class SingleElement(Element):
 
     TAG_RAW = "<{tag_name}{params}/>"
 
-    def __init__(self, **kwargs):
-        super(SingleElement, self).__init__(**kwargs)
+    def __init__(self, **props):
+        super(SingleElement, self).__init__(**props)
 
 
 # Base
 
 
 class html(Element):
-    TAG_RAW = "<!doctype html><{tag_name}{params}>{contents}</{tag_name}>"
+    TAG_RAW = "<!doctype html><{tag_name}{params}>{childrens}</{tag_name}>"
 
 
 class head(Element):
