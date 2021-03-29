@@ -1,4 +1,4 @@
-from pyplater.utils import classing, Props
+from pyplater.utils import Props, classing
 
 
 def test_classing():

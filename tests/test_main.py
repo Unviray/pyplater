@@ -1,7 +1,7 @@
 from collections import namedtuple
 
+from pyplater import _input, a, button, div, em, h1, hr, html, li, ul
 from pyplater.tag import Element
-from pyplater import _input, a, button, div, em, h1, html, hr, li, ul
 
 
 def test_main():
@@ -18,7 +18,9 @@ def test_main():
 def test_param():
     component = a("Google", href="https://www.google.com/")
 
-    assert component.render() == ('<a href="https://www.google.com/">Google</a>')
+    assert component.render() == (
+        '<a href="https://www.google.com/">Google</a>'
+    )
 
 
 def test_formating():
@@ -41,7 +43,9 @@ def test_formating_attribute():
 
     component["person"] = person
 
-    assert component.render() == "<h1>My name is John Doe and I'm 28 years old</h1>"
+    assert component.render() == (
+        "<h1>My name is John Doe and I'm 28 years old</h1>"
+    )
 
 
 def test_bind():
@@ -52,7 +56,10 @@ def test_bind():
 
 
 def test_recursive_formating():
-    component = div("I like these color", ul(li("{spec}"), li("Green"), li("Blue"),))
+    component = div(
+        "I like these color",
+        ul(li("{spec}"), li("Green"), li("Blue"),)
+    )
 
     component["spec"] = "Red"
     assert component.render() == (
@@ -112,7 +119,9 @@ def test_callable_to_tag():
 def test_class_list():
     btn = button("submit", _class=["btn", "btn-primary", "btn-block"])
 
-    assert btn.render() == ('<button class="btn btn-primary btn-block">submit</button>')
+    assert btn.render() == (
+        '<button class="btn btn-primary btn-block">submit</button>'
+    )
 
 
 def test_children_list():
@@ -124,7 +133,9 @@ def test_children_list():
 def test_children_list_recursive():
     component = div([div("A"), div([div("B"), [div("C")]])])
 
-    assert component.render() == "<div><div>A</div> <div><div>B</div> <div>C</div></div></div>"
+    assert component.render() == (
+        "<div><div>A</div> <div><div>B</div> <div>C</div></div></div>"
+    )
 
 
 def test_reserved_name():

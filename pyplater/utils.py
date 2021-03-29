@@ -5,8 +5,8 @@ pyplater.utils
 Utilities in pyplater.
 """
 
-from typing import Iterable
 from collections import UserDict
+from typing import Iterable
 
 
 def classing(*args):

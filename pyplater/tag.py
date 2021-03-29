@@ -1,12 +1,13 @@
 """
 pyplater.tag
-=============
+============
 
 Include all tags.
 """
 
-from typing import Iterable
-from .utils import classing, Props
+from typing import List
+
+from .utils import Props, classing
 
 
 class Element(object):
@@ -34,9 +35,11 @@ class Element(object):
             if isinstance(children, Element):
                 children.__set_parent(self)
 
-        self.TAG_NAME = self.TAG_NAME or self.__class__.__name__.replace("_", "")
+        self.TAG_NAME = (
+            self.TAG_NAME or self.__class__.__name__.replace("_", "")
+        )
 
-    def _render_children(self, childrens=None):
+    def _render_children(self, childrens=None) -> List[str]:
         result = []
 
         if childrens is None:
@@ -58,7 +61,7 @@ class Element(object):
 
         return result
 
-    def render(self):
+    def render(self) -> str:
         """
         Transform Element to str and recursively their children.
         """
@@ -99,12 +102,12 @@ class Element(object):
             childrens="".join(childrens),
         )
 
-    def _formating(self, text):
+    def _formating(self, text) -> str:
         """
         Get setted item and format :param text:
         """
 
-        formating_map = dict()
+        formating_map = {}
         for key in self.formated:
             formating_map[key] = self.formated[key]
 
@@ -115,7 +118,7 @@ class Element(object):
             except KeyError as k:
                 formating_map[str(k).replace("'", "")] = ""
                 unknown_key = str(k)
-            except AttributeError as a:
+            except AttributeError:
                 raise AttributeError(f"Unknown variable {unknown_key}")
 
     def bind(_self, **kwargs):
@@ -173,7 +176,13 @@ class SingleElement(Element):
 
     TAG_RAW = "<{tag_name}{props}/>"
 
-    def __init__(self, **props):
+    def __init__(self, *children, **props):
+        props["children"] = props.get("children", [])
+        props["children"].extend(children)
+
+        if len(props["children"]) == 0:
+            del props["children"]
+
         super(SingleElement, self).__init__(**props)
 
 
