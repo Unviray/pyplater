@@ -2,7 +2,7 @@ Contribution Guidelines
 =======================
 
 Whether reporting bugs, discussing improvements and new ideas or writing
-extensions: Contributions to Pyplaterr are welcome! Here's how to get started:
+extensions: Contributions to pyplater are welcome! Here's how to get started:
 
 1. Check for open issues or open a fresh issue to start a discussion around
    a feature idea or a bug
@@ -15,10 +15,10 @@ extensions: Contributions to Pyplaterr are welcome! Here's how to get started:
    published :)
 
 
-Philosophy of Pyplaterr
+Philosophy of pyplater
 -----------------------
 
-Pyplaterr aims to be simple and fun to use. Therefore two key values are simplicity
+pyplater aims to be simple and fun to use. Therefore two key values are simplicity
 and elegance of interfaces and code. These values will contradict each other
 from time to time. In these cases , try using as little magic as possible.
 In any case don't forget documenting code that isn't clear at first glance.
@@ -27,7 +27,7 @@ In any case don't forget documenting code that isn't clear at first glance.
 Code Conventions
 ----------------
 
-In general the Pyplaterr source should always follow
+In general the pyplater source should always follow
 `PEP 8 <http://legacy.python.org/dev/peps/pep-0008/>`_. Exceptions are allowed
 in well justified and documented cases. However we make a small exception
 concerning docstrings:
@@ -48,6 +48,6 @@ on their own lines and add an empty line after it.
 Version Numbers
 ---------------
 
-Pyplaterr follows the `SemVer versioning guidelines <http://semver.org/>`_.
+pyplater follows the `SemVer versioning guidelines <http://semver.org/>`_.
 This implies that backwards incompatible changes in the API will increment
 the major version. So think twice before making such changes.

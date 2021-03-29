@@ -1,4 +1,4 @@
-Pyplaterr
+pyplater
 =========
 
 Build ``html`` component with python.
@@ -26,7 +26,7 @@ Contributing
 ------------
 
 Whether reporting bugs, discussing improvements and new ideas or writing
-extensions: Contributions to Pyplaterr are welcome! Here's how to get started:
+extensions: Contributions to pyplater are welcome! Here's how to get started:
 
 1. Check for open issues or open a fresh issue to start a discussion around
    a feature idea or a bug
