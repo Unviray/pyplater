@@ -5,7 +5,8 @@ pyplater.tag
 Include all tags.
 """
 
-from .utils import classing
+from typing import Iterable
+from .utils import classing, Props
 
 
 class Element(object):
@@ -13,7 +14,7 @@ class Element(object):
     Base element of any tags.
     """
 
-    TAG_RAW = "<{tag_name}{params}>{childrens}</{tag_name}>"
+    TAG_RAW = "<{tag_name}{props}>{childrens}</{tag_name}>"
     # TAG_RAW = "<Element class='bg-dark'>The element</Element>"
 
     TAG_NAME = None
@@ -23,59 +24,78 @@ class Element(object):
         if isinstance(self._class, str):
             self._class = self._class.split(" ")
 
-        self.param = props
+        self.props = Props(props)
         self.children = list(children)
         self.formated = {}
 
+        self.parent = None
+
+        for children in self.children:
+            if isinstance(children, Element):
+                children.__set_parent(self)
+
         self.TAG_NAME = self.TAG_NAME or self.__class__.__name__.replace("_", "")
+
+    def _render_children(self, childrens=None):
+        result = []
+
+        if childrens is None:
+            childrens = self.children
+
+        for children in childrens:
+            if callable(children):
+                children = children()
+
+            if isinstance(children, Element):
+                children = children.render()
+            elif isinstance(children, (list, tuple)):
+                children = " ".join(self._render_children(children))
+            # elif isinstance(children, str):
+            else:
+                children = str(children)
+
+            result.append(self._formating(children))
+
+        return result
 
     def render(self):
         """
         Transform Element to str and recursively their children.
         """
 
-        params = []  # handle list of params ex: href="https://github.com"
+        props = []  # handle list of props ex: href="https://github.com"
         childrens = []  # handle list of childrens ex: <p>name</p>
 
         if len(self._class) != 0:
             value_class = classing(self._class)
-            params.append(f'class="{value_class}"')
+            props.append(f'class="{value_class}"')
 
         # render attribute
-        for key in self.param:
+        for key in self.props:
             # ex: href="https://{site}"
             if key.startswith("_"):
-                key_param = key.replace("_", "", 1)  # _class -> class
+                key_props = key.replace("_", "", 1)  # _class -> class
             else:
-                key_param = key.replace("_", "-")  # aria_clic -> aria-click
-            value_param = self.param[key]
+                key_props = key.replace("_", "-")  # aria_clic -> aria-click
+            value_props = self.props[key]
 
-            result = f'{key_param}="{value_param}"'
+            result = f'{key_props}="{value_props}"'
             # ex: href="https://www.google.com"
-            params.append(self._formating(result))
+
+            props.append(self._formating(result))
 
         # render children
-        for children in self.children:
-            if callable(children):
-                children = children()
+        childrens = self._render_children()
 
-            if isinstance(children, Element):
-                result = children.render()
-            # elif isinstance(children, str):
-            else:
-                result = str(children)
-
-            childrens.append(self._formating(result))
-
-        # add space between tag_name and params
-        if len(params) == 0:
+        # add space between tag_name and props
+        if len(props) == 0:
             first_space = ""
         else:
             first_space = " "
 
         return self.TAG_RAW.format(
             tag_name=self.TAG_NAME,
-            params=first_space + " ".join(params),
+            props=first_space + " ".join(props),
             childrens="".join(childrens),
         )
 
@@ -84,16 +104,25 @@ class Element(object):
         Get setted item and format :param text:
         """
 
-        key = self.formated.copy()
+        formating_map = dict()
+        for key in self.formated:
+            formating_map[key] = self.formated[key]
 
-        if len(key) == 0:
-            return text
-
+        unknown_key = None
         while True:
             try:
-                return text.format_map(key)
+                return text.format_map(formating_map)
             except KeyError as k:
-                key[str(k).replace("'", "")] = ""
+                formating_map[str(k).replace("'", "")] = ""
+                unknown_key = str(k)
+            except AttributeError as a:
+                raise AttributeError(f"Unknown variable {unknown_key}")
+
+    def bind(_self, **kwargs):
+        for key in kwargs:
+            _self[key] = kwargs[key]
+
+        return _self
 
     def __setitem__(self, key, value):
         """
@@ -130,13 +159,19 @@ class Element(object):
 
         return self
 
+    def __str__(self) -> str:
+        return self.render()
+
+    def __set_parent(self, parent):
+        self.parent = parent
+
 
 class SingleElement(Element):
     """
     For single tag like: <img/>, <hr/> ...
     """
 
-    TAG_RAW = "<{tag_name}{params}/>"
+    TAG_RAW = "<{tag_name}{props}/>"
 
     def __init__(self, **props):
         super(SingleElement, self).__init__(**props)
@@ -146,7 +181,7 @@ class SingleElement(Element):
 
 
 class html(Element):
-    TAG_RAW = "<!doctype html><{tag_name}{params}>{childrens}</{tag_name}>"
+    TAG_RAW = "<!doctype html><{tag_name}{props}>{childrens}</{tag_name}>"
 
 
 class head(Element):

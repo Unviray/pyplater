@@ -1,4 +1,4 @@
-from pyplater.utils import classing
+from pyplater.utils import classing, Props
 
 
 def test_classing():
@@ -9,3 +9,10 @@ def test_classing():
 
     result = classing(*data)
     assert result == 'fff sss ee aa ww az s at un'
+
+
+def test_props():
+    props = Props({"id": "important", "href": "https://google.com"})
+
+    assert props["id"] == "important"
+    assert props.href == "https://google.com"

@@ -6,6 +6,7 @@ Utilities in pyplater.
 """
 
 from typing import Iterable
+from collections import UserDict
 
 
 def classing(*args):
@@ -22,3 +23,8 @@ def classing(*args):
         result.append(item)
 
     return ' '.join(result)
+
+
+class Props(UserDict):
+    def __getattr__(self, key):
+        return self.get(key, "")
