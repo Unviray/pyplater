@@ -82,8 +82,13 @@ class Element(object):
                 key_props = key.replace("_", "-")  # aria_clic -> aria-click
             value_props = self.props[key]
 
-            result = f'{key_props}="{value_props}"'
-            # ex: href="https://www.google.com"
+            if value_props == True:
+                result = key_props  # uni-attribute. ex: disable
+            elif value_props == False:
+                pass
+            else:
+                result = f'{key_props}="{value_props}"'
+                # ex: href="https://www.google.com"
 
             props.append(self._formating(result))
 
@@ -177,6 +182,7 @@ class SingleElement(Element):
     TAG_RAW = "<{tag_name}{props}/>"
 
     def __init__(self, *children, **props):
+        # Convert children to props
         props["children"] = props.get("children", [])
         props["children"].extend(children)
 

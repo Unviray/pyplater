@@ -150,6 +150,12 @@ def test_underscore_attribute():
     assert component.render() == '<a data-attribute="value"></a>'
 
 
+def test_uni_attribute():
+    component = button(disabled=True)
+
+    assert component.render() == '<button disabled></button>'
+
+
 def test_call():
     component = div(data="value")(h1('content'), 'text')
 
