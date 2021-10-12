@@ -158,7 +158,7 @@ class Element(object):
         Populate children
         """
 
-        self.children += list(children)
+        self.children.extend(children)
 
         return self
 
