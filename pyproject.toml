@@ -1,9 +1,16 @@
 [tool.poetry]
 name = "pyplater"
 version = "2.1.2-beta"
+readme = "README.rst"
 description = "Build html component with python"
 authors = ["Unviray <unviray@gmail.com>"]
+homepage = "https://github.com/Unviray/pyplater"
+repository = "https://github.com/Unviray/pyplater"
 license = "MIT"
+keywords = ["html", "component", "react", "angular", "vue"]
+packages = [
+    { include = "pyplater" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
