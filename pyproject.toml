@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyplater"
-version = "2.1.2-beta"
+version = "2.1.3-beta"
 readme = "README.rst"
 description = "Build html component with python"
 authors = ["Unviray <unviray@gmail.com>"]
