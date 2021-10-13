@@ -25,6 +25,6 @@ def classing(*args):
     return ' '.join(result)
 
 
-class Props(UserDict):
+class Attrs(UserDict):
     def __getattr__(self, key):
         return self.get(key, "")
