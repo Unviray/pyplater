@@ -156,6 +156,12 @@ def test_uni_attribute():
     assert component.render() == '<button disabled></button>'
 
 
+def test_uni_null_attribute():
+    component = button(disabled=False)
+
+    assert component.render() == '<button></button>'
+
+
 def test_call():
     component = div(data="value")(h1('content'), 'text')
 
