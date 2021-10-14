@@ -15,14 +15,14 @@ Usage example:
 """
 
 
-from .tag import (_del, _input, a, abbr, address, article, aside, audio,
-                  blockquote, body, br, button, caption, cite, dd, dfn, div,
-                  dl, dt, em, fieldset, figcaption, figure, footer, form, h1,
-                  h2, h3, h4, h5, h6, head, header, hr, html, i, img, ins, kbd,
-                  label, legend, li, link, mark, meta, nav, ol, optgroup,
-                  option, p, pre, progress, q, script, section, select, source,
-                  span, strong, style, sub, sup, table, tbody, td, textarea,
-                  tfoot, th, thead, time, title, tr, ul, video)
+from .tags import (_del, _input, a, abbr, address, article, aside, audio,
+                   blockquote, body, br, button, caption, cite, dd, dfn, div,
+                   dl, dt, em, fieldset, figcaption, figure, footer, form, h1,
+                   h2, h3, h4, h5, h6, head, header, hr, html, i, img, ins, kbd,
+                   label, legend, li, link, mark, meta, nav, ol, optgroup,
+                   option, p, pre, progress, q, script, section, select, source,
+                   span, strong, style, sub, sup, table, tbody, td, textarea,
+                   tfoot, th, thead, time, title, tr, ul, video)
 
 __all__ = (
     # Base

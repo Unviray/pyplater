@@ -1,7 +1,7 @@
 from collections import namedtuple
 
 from pyplater import _input, a, button, div, em, h1, hr, html, li, ul
-from pyplater.tag import Element
+from pyplater.element import Element
 
 
 def test_main():
@@ -23,7 +23,7 @@ def test_param():
     )
 
 
-def test_formating():
+def test_formatting():
     component = h1("My name is {name}")
 
     assert component.render() == "<h1>My name is </h1>"
@@ -35,7 +35,7 @@ def test_formating():
     assert component.render() == "<h1>My name is John Doe</h1>"
 
 
-def test_formating_attribute():
+def test_formatting_attribute():
     component = h1("My name is {person.name} and I'm {person.age} years old")
 
     Person = namedtuple("Person", ["name", "age"])
@@ -55,7 +55,7 @@ def test_bind():
     assert component.render() == "<div>My name is John Doe</div>"
 
 
-def test_recursive_formating():
+def test_recursive_formatting():
     component = div(
         "I like these color",
         ul(li("{spec}"), li("Green"), li("Blue"),)
@@ -85,7 +85,7 @@ def test_recursive_formating():
     )
 
 
-def test_formating_accessibility():
+def test_formatting_accessibility():
     li_item = li("{spec}")
     ul_item = ul(li_item, li("Green"), li("Blue"))
     component = div("I like these color", ul_item)
@@ -94,7 +94,7 @@ def test_formating_accessibility():
     assert component["spec"] == "Red"
 
 
-def test_formating_not_found():
+def test_formatting_not_found():
     component = div("I like these color")
 
     assert component["color"] is None
