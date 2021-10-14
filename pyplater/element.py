@@ -57,13 +57,13 @@ class Element(object):
                 child = str(child)
 
             while isinstance(child, Element):
-                child = child.render()
+                child = child._render()
 
             result.append(self._formatting(child))
 
         return result
 
-    def render(self) -> str:
+    def _render(self) -> str:
         """
         Transform Element to str and recursively their children.
         """
@@ -170,7 +170,7 @@ class Element(object):
         return self
 
     def __str__(self) -> str:
-        return self.render()
+        return self._render()
 
     def __set_parent(self, parent):
         self.parent = parent

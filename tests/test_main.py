@@ -9,7 +9,7 @@ from pyplater.element import Element
 def test_main():
     component = div(h1("Title"), hr(), _class="content", _id="content")
 
-    assert component.render() == (
+    assert str(component) == (
         '<div class="content" id="content"><h1>Title</h1><hr/></div>'
     )
     assert str(component) == (
@@ -20,7 +20,7 @@ def test_main():
 def test_param():
     component = a("Google", href="https://www.google.com/")
 
-    assert component.render() == (
+    assert str(component) == (
         '<a href="https://www.google.com/">Google</a>'
     )
 
@@ -28,13 +28,13 @@ def test_param():
 def test_formatting():
     component = h1("My name is {name}")
 
-    assert component.render() == "<h1>My name is </h1>"
+    assert str(component) == "<h1>My name is </h1>"
 
     component["name"] = "Alice"
-    assert component.render() == "<h1>My name is Alice</h1>"
+    assert str(component) == "<h1>My name is Alice</h1>"
 
     component["name"] = "John Doe"
-    assert component.render() == "<h1>My name is John Doe</h1>"
+    assert str(component) == "<h1>My name is John Doe</h1>"
 
 
 def test_formatting_attribute():
@@ -45,7 +45,7 @@ def test_formatting_attribute():
 
     component["person"] = person
 
-    assert component.render() == (
+    assert str(component) == (
         "<h1>My name is John Doe and I'm 28 years old</h1>"
     )
 
@@ -54,7 +54,7 @@ def test_bind():
     name = "John Doe"
     component = div("My name is {name}").bind(**locals())
 
-    assert component.render() == "<div>My name is John Doe</div>"
+    assert str(component) == "<div>My name is John Doe</div>"
 
 
 def test_recursive_formatting():
@@ -64,7 +64,7 @@ def test_recursive_formatting():
     )
 
     component["spec"] = "Red"
-    assert component.render() == (
+    assert str(component) == (
         "<div>"
         "I like these color"
         "<ul>"
@@ -75,7 +75,7 @@ def test_recursive_formatting():
         "</div>"
     )
     component["spec"] = "Purple"
-    assert component.render() == (
+    assert str(component) == (
         "<div>"
         "I like these color"
         "<ul>"
@@ -107,7 +107,7 @@ def test_callable_to_str():
         return "Red"
 
     component = div("I like ", color, " color")
-    assert component.render() == "<div>I like Red color</div>"
+    assert str(component) == "<div>I like Red color</div>"
 
 
 def test_callable_to_tag():
@@ -115,13 +115,13 @@ def test_callable_to_tag():
         return em("Red")
 
     component = div("I like ", color, " color")
-    assert component.render() == "<div>I like <em>Red</em> color</div>"
+    assert str(component) == "<div>I like <em>Red</em> color</div>"
 
 
 def test_class_list():
     btn = button("submit", _class=["btn", "btn-primary", "btn-block"])
 
-    assert btn.render() == (
+    assert str(btn) == (
         '<button class="btn btn-primary btn-block">submit</button>'
     )
 
@@ -129,13 +129,13 @@ def test_class_list():
 def test_children_list():
     component = div([div("A"), div("B")])
 
-    assert component.render() == "<div><div>A</div> <div>B</div></div>"
+    assert str(component) == "<div><div>A</div> <div>B</div></div>"
 
 
 def test_children_list_recursive():
     component = div([div("A"), div([div("B"), [div("C")]])])
 
-    assert component.render() == (
+    assert str(component) == (
         "<div><div>A</div> <div><div>B</div> <div>C</div></div></div>"
     )
 
@@ -143,36 +143,36 @@ def test_children_list_recursive():
 def test_reserved_name():
     component = _input()
 
-    assert component.render() == "<input/>"
+    assert str(component) == "<input/>"
 
 
 def test_underscore_attribute():
     component = a(data_attribute="value")
 
-    assert component.render() == '<a data-attribute="value"></a>'
+    assert str(component) == '<a data-attribute="value"></a>'
 
 
 def test_uni_attribute():
     component = button(disabled=True)
 
-    assert component.render() == '<button disabled></button>'
+    assert str(component) == '<button disabled></button>'
 
 
 def test_uni_null_attribute():
     component = button(disabled=False)
 
-    assert component.render() == '<button></button>'
+    assert str(component) == '<button></button>'
 
 
 def test_call():
     component = div(data="value")(h1('content'), 'text')
 
-    assert component.render() == '<div data="value"><h1>content</h1>text</div>'
+    assert str(component) == '<div data="value"><h1>content</h1>text</div>'
 
 
 def test_single_element():
     component = hr()
-    assert component.render() == "<hr/>"
+    assert str(component) == "<hr/>"
 
 
 def test_single_element_children():
@@ -181,7 +181,7 @@ def test_single_element_children():
     assert component.props == {"children": ["hello"]}
 
     with pytest.warns(UserWarning):
-        assert component.render() == "<hr/>"
+        assert str(component) == "<hr/>"
 
 
 def test_custom_tag():
@@ -191,11 +191,11 @@ def test_custom_tag():
 
     component = an_element(data="value")
 
-    assert component.render() == 'Foo [ data="value" ]'
+    assert str(component) == 'Foo [ data="value" ]'
 
 
 # Each tag
 
 
 def test_html():
-    assert html().render() == "<!doctype html><html></html>"
+    assert str(html()) == "<!doctype html><html></html>"
