@@ -5,6 +5,7 @@ pyplater.element
 Include definitions of Element and SingleElement.
 """
 
+import warnings
 from typing import List
 
 from .utils import Props, classing
@@ -76,8 +77,7 @@ class Element(object):
         # render attribute
         for key in self.props:
             if key == 'children':
-                print("Warning: a child is passed to the SingleElement {name}".format(
-                    self.TAG_NAME))
+                warnings.warn(f"Warning: a child is passed to the SingleElement {self.TAG_NAME}")
                 continue
 
             # ex: href="https://{site}"

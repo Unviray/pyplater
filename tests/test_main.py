@@ -1,5 +1,7 @@
 from collections import namedtuple
 
+import pytest
+
 from pyplater import _input, a, button, div, em, h1, hr, html, li, ul
 from pyplater.element import Element
 
@@ -166,6 +168,20 @@ def test_call():
     component = div(data="value")(h1('content'), 'text')
 
     assert component.render() == '<div data="value"><h1>content</h1>text</div>'
+
+
+def test_single_element():
+    component = hr()
+    assert component.render() == "<hr/>"
+
+
+def test_single_element_children():
+    component = hr("hello")
+
+    assert component.props == {"children": ["hello"]}
+
+    with pytest.warns(UserWarning):
+        assert component.render() == "<hr/>"
 
 
 def test_custom_tag():
