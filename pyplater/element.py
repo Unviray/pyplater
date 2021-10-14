@@ -1,6 +1,6 @@
 """
 pyplater.element
-============
+================
 
 Include definitions of Element and SingleElement.
 """
@@ -49,13 +49,14 @@ class Element(object):
             if callable(child):
                 child = child()
 
-            if isinstance(child, Element):
-                child = child.render()
             elif isinstance(child, (list, tuple)):
                 child = " ".join(self._render_children(child))
-            # elif isinstance(child, str):
-            else:
+
+            elif isinstance(child, str):
                 child = str(child)
+
+            while isinstance(child, Element):
+                child = child.render()
 
             result.append(self._formatting(child))
 
@@ -86,10 +87,10 @@ class Element(object):
                 key_props = key.replace("_", "-")  # aria_clic -> aria-click
             value_props = self.props[key]
 
-            if value_props == True:
+            if value_props is True:
                 result = key_props  # uni-attribute. ex: disable
-            elif value_props == False:
-                pass
+            elif value_props is False:
+                result = ""
             else:
                 result = f'{key_props}="{value_props}"'
                 # ex: href="https://www.google.com"
@@ -97,7 +98,7 @@ class Element(object):
             props.append(self._formatting(result))
 
         # add space between tag_name and props
-        if len(props) == 0:
+        if (len(props) == 0) or (props == [""]):
             first_space = ""
         else:
             first_space = " "
