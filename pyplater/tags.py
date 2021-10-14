@@ -11,7 +11,7 @@ from .element import Element, SingleElement
 
 
 class html(Element):
-    TAG_RAW = "<!doctype html><{tag_name}{attrs}>{children}</{tag_name}>"
+    TAG_RAW = "<!doctype html><{tag_name}{props}>{children}</{tag_name}>"
 
 
 class head(Element):

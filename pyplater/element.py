@@ -7,7 +7,7 @@ Include definitions of Element and SingleElement.
 
 from typing import List
 
-from .utils import Attrs, classing
+from .utils import Props, classing
 
 
 class Element(object):
@@ -15,17 +15,17 @@ class Element(object):
     Base element of any tags.
     """
 
-    TAG_RAW = "<{tag_name}{attrs}>{children}</{tag_name}>"
+    TAG_RAW = "<{tag_name}{props}>{children}</{tag_name}>"
     # TAG_RAW = "<Element class='bg-dark'>The element</Element>"
 
     TAG_NAME = None
 
-    def __init__(self, *children, **attrs):
-        self._class = attrs.pop("_class", [])
+    def __init__(self, *children, **props):
+        self._class = props.pop("_class", [])
         if isinstance(self._class, str):
             self._class = self._class.split(" ")
 
-        self.attrs = Attrs(attrs)
+        self.props = Props(props)
         self.children = list(children)
         self.formatted = {}
 
@@ -66,40 +66,40 @@ class Element(object):
         Transform Element to str and recursively their children.
         """
 
-        attrs = []  # handle list of attrs ex: href="https://github.com"
+        props = []  # handle list of props ex: href="https://github.com"
 
         if len(self._class) != 0:
             value_class = classing(self._class)
-            attrs.append(f'class="{value_class}"')
+            props.append(f'class="{value_class}"')
 
         # render attribute
-        for key in self.attrs:
+        for key in self.props:
             # ex: href="https://{site}"
             if key.startswith("_"):
-                key_attrs = key.replace("_", "", 1)  # _class -> class
+                key_props = key.replace("_", "", 1)  # _class -> class
             else:
-                key_attrs = key.replace("_", "-")  # aria_clic -> aria-click
-            value_attrs = self.attrs[key]
+                key_props = key.replace("_", "-")  # aria_clic -> aria-click
+            value_props = self.props[key]
 
-            if value_attrs == True:
-                result = key_attrs  # uni-attribute. ex: disable
-            elif value_attrs == False:
+            if value_props == True:
+                result = key_props  # uni-attribute. ex: disable
+            elif value_props == False:
                 pass
             else:
-                result = f'{key_attrs}="{value_attrs}"'
+                result = f'{key_props}="{value_props}"'
                 # ex: href="https://www.google.com"
 
-            attrs.append(self._formatting(result))
+            props.append(self._formatting(result))
 
-        # add space between tag_name and attrs
-        if len(attrs) == 0:
+        # add space between tag_name and props
+        if len(props) == 0:
             first_space = ""
         else:
             first_space = " "
 
         return self.TAG_RAW.format(
             tag_name=self.TAG_NAME,
-            attrs=first_space + " ".join(attrs),
+            props=first_space + " ".join(props),
             children="".join(self._render_children()),
         )
 
@@ -175,14 +175,14 @@ class SingleElement(Element):
     For single tag like: <img/>, <hr/> ...
     """
 
-    TAG_RAW = "<{tag_name}{attrs}/>"
+    TAG_RAW = "<{tag_name}{props}/>"
 
-    def __init__(self, *children, **attrs):
-        # Convert children to attrs
-        attrs["children"] = attrs.get("children", [])
-        attrs["children"].extend(children)
+    def __init__(self, *children, **props):
+        # Convert children to props
+        props["children"] = props.get("children", [])
+        props["children"].extend(children)
 
-        if len(attrs["children"]) == 0:
-            del attrs["children"]
+        if len(props["children"]) == 0:
+            del props["children"]
 
-        super(SingleElement, self).__init__(**attrs)
+        super(SingleElement, self).__init__(**props)

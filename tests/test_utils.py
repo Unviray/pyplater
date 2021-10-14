@@ -1,4 +1,4 @@
-from pyplater.utils import Attrs, classing
+from pyplater.utils import Props, classing
 
 
 def test_classing():
@@ -11,8 +11,8 @@ def test_classing():
     assert result == 'fff sss ee aa ww az s at un'
 
 
-def test_attrs():
-    attrs = Attrs({"id": "important", "href": "https://google.com"})
+def test_props():
+    props = Props({"id": "important", "href": "https://google.com"})
 
-    assert attrs["id"] == "important"
-    assert attrs.href == "https://google.com"
+    assert props["id"] == "important"
+    assert props.href == "https://google.com"

@@ -164,7 +164,7 @@ def test_call():
 
 def test_custom_tag():
     class an_element(Element):
-        TAG_RAW = "{tag_name} [{attrs} ]"
+        TAG_RAW = "{tag_name} [{props} ]"
         TAG_NAME = "Foo"
 
     component = an_element(data="value")
