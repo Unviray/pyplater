@@ -57,7 +57,10 @@ class Element(object):
                 child = str(child)
 
             while isinstance(child, Element):
-                child = child._render()
+                if isinstance(child, Component):
+                    child = child.render()
+                else:
+                    child = child._render()
 
             result.append(self._formatting(child))
 
@@ -192,3 +195,23 @@ class SingleElement(Element):
             del props["children"]
 
         super().__init__(**props)
+
+
+class Component(Element):
+    def __init__(self, *children, **props):
+        super().__init__(*children, **props)
+        for key in props:
+            try:
+                getattr(self, key)
+                setattr(self, key, props[key])
+            except AttributeError:
+                pass
+
+    def __str__(self) -> str:
+        # result = super().__str__()
+
+        # while isinstance(result, Element):
+        #     result = result.render()
+
+        # return result
+        return str(self.render())

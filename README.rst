@@ -19,7 +19,7 @@ Build ``html`` component with python.
         ),
     )
 
-    print(documents.render())
+    print(documents)
 
 
 Contributing

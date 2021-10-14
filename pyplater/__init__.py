@@ -10,11 +10,12 @@ Usage example:
 
 >>> from pyplater import h1
 >>> title = h1("title")
->>> title.render()
+>>> print(title)
 <h1>title</h1>
 """
 
 
+from .element import Component
 from .tags import (_del, _input, a, abbr, address, article, aside, audio,
                    blockquote, body, br, button, caption, cite, dd, dfn, div,
                    dl, dt, em, fieldset, figcaption, figure, footer, form, h1,
@@ -52,6 +53,8 @@ __all__ = (
 
     # Generic
     'div', 'span',
+
+    'Component'
 )
 
 
