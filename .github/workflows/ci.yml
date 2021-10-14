@@ -1,12 +1,9 @@
-name: Upload Python Package
+name: CI
 
-on:
-  release:
-    types: [created]
+on: [pull_request, push, workflow_dispatch]
 
 jobs:
-  deploy:
-
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +14,6 @@ jobs:
         python-version: '3.9'
     - name: Python Poetry Action
       uses: abatilo/actions-poetry@v2.1.3
-    - name: Build and publish
+    - name: Run Test
       run: |
-        poetry publish --build --username ${{ secrets.PYPI_USERNAME }} --password ${{ secrets.PYPI_PASSWORD }}
+        poetry run pytest
