@@ -325,3 +325,39 @@ class div(Element):
 
 class span(Element):
     pass
+
+
+# HTML5
+
+class details(Element):
+    pass
+
+class summary(Element):
+    pass
+
+class dialog(Element):
+    pass
+
+class menu(Element):
+    pass
+
+class command(Element):
+    pass
+
+class datalist(Element):
+    pass
+
+class output(Element):
+    pass
+
+class meter(Element):
+    pass
+
+class wbr(SingleElement):
+    pass
+
+class hgroup(Element):
+    pass
+
+class keygen(Element):
+    pass
